@@ -1,0 +1,33 @@
+[package]
+name = "ryg-rans-sys"
+version = "1.0.0"
+edition = "2021"
+description = "FFI bindings for ryg_rans.\n\nryg_rans is automatically built and linked statically. Requires a C compiler."
+categories = [ "external-ffi-bindings", "encoding" ]
+authors = ["Mateusz Maćkowski <mateusz@mackowski.org>"]
+include = ["src/**/*", "vendor/**/*", "Cargo.toml", "README.md"]
+keywords = ["rANS", "ANS", "static"]
+readme = "README.md"
+repository = "https://github.com/m4tx/ryg-rans-sys.git"
+homepage = "https://github.com/m4tx/ryg-rans-sys"
+license = "MIT"
+build = "src/build.rs"
+links = "ryg_rans"
+
+[dependencies]
+libc = "0.2.126"
+
+[build-dependencies]
+cc = { version = "1.0.73", features = ["parallel"] }
+dunce = "1.0.2"
+bindgen = "0.60.1"
+
+[lib]
+name = "ryg_rans_sys"
+crate-type = ["staticlib", "cdylib", "lib"]
+
+[features]
+default = ["byte"]
+byte = []
+64 = []
+word_sse41 = []
