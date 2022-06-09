@@ -18,8 +18,30 @@ fn main() {
         "cargo:include={}",
         env::join_paths(&[&src, &vendor]).unwrap().to_str().unwrap()
     );
-    println!("cargo:rerun-if-changed=src/*.c");
-    println!("cargo:rerun-if-changed=src/*.h");
+    println!(
+        "cargo:rerun-if-changed={}/rans_byte_wrapper.c",
+        src.to_str().unwrap()
+    );
+    println!(
+        "cargo:rerun-if-changed={}/rans_byte_wrapper.h",
+        src.to_str().unwrap()
+    );
+    println!(
+        "cargo:rerun-if-changed={}/rans64_wrapper.c",
+        src.to_str().unwrap()
+    );
+    println!(
+        "cargo:rerun-if-changed={}/rans64_wrapper.h",
+        src.to_str().unwrap()
+    );
+    println!(
+        "cargo:rerun-if-changed={}/rans_word_sse41_wrapper.c",
+        src.to_str().unwrap()
+    );
+    println!(
+        "cargo:rerun-if-changed={}/rans_word_sse41_wrapper.h",
+        src.to_str().unwrap()
+    );
     c.include(&src);
     c.include(&vendor);
     c.pic(true);
