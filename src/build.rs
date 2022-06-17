@@ -56,7 +56,7 @@ fn main() {
     #[cfg(feature = "byte")]
     files.push("src/rans_byte_wrapper.c");
     #[cfg(feature = "64")]
-    files.push("src/rans64_wrapper.c");
+    files.push("src/rans_64_wrapper.c");
     #[cfg(feature = "word_sse41")]
     files.push("src/rans_word_sse41_wrapper.c");
 
@@ -69,7 +69,7 @@ fn main() {
     #[cfg(feature = "byte")]
     gen_bindings(&src, &vendor, "rans_byte");
     #[cfg(feature = "64")]
-    gen_bindings(&src, &vendor, "rans64");
+    gen_bindings(&src, &vendor, "rans_64");
     #[cfg(feature = "word_sse41")]
     gen_bindings(&src, &vendor, "rans_word_sse41");
 }

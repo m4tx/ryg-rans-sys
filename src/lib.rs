@@ -10,7 +10,7 @@ pub mod rans_byte {
 
 #[cfg(feature = "64")]
 pub mod rans_64 {
-    include!(concat!(env!("OUT_DIR"), "/rans64.rs"));
+    include!(concat!(env!("OUT_DIR"), "/rans_64.rs"));
 }
 
 #[cfg(feature = "word_sse41")]
