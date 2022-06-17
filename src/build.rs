@@ -27,11 +27,11 @@ fn main() {
         src.to_str().unwrap()
     );
     println!(
-        "cargo:rerun-if-changed={}/rans64_wrapper.c",
+        "cargo:rerun-if-changed={}/rans_64_wrapper.c",
         src.to_str().unwrap()
     );
     println!(
-        "cargo:rerun-if-changed={}/rans64_wrapper.h",
+        "cargo:rerun-if-changed={}/rans_64_wrapper.h",
         src.to_str().unwrap()
     );
     println!(
