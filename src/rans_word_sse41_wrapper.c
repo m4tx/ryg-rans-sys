@@ -5,7 +5,7 @@ void rans_word_tables_init_symbol(RansWordTables* tab, uint8_t sym, uint32_t sta
 }
 
 RansWordEnc rans_word_enc_init() {
-    RansWordEncInit();
+    return RansWordEncInit();
 }
 
 void rans_word_enc_put(RansWordEnc* r, uint16_t** pptr, uint32_t start, uint32_t freq) {
@@ -21,7 +21,7 @@ void rans_word_dec_init(RansWordDec* r, uint16_t** pptr) {
 }
 
 uint8_t rans_word_dec_sym(RansWordDec* r, RansWordTables const* tab) {
-    RansWordDecSym(r, tab);
+    return RansWordDecSym(r, tab);
 }
 
 void rans_word_dec_renorm(RansWordDec* r, uint16_t** pptr) {
@@ -33,7 +33,7 @@ void rans_simd_dec_init(RansSimdDec* r, uint16_t** pptr) {
 }
 
 uint32_t rans_simd_dec_sym(RansSimdDec* r, RansWordTables const* tab) {
-    RansSimdDecSym(r, tab);
+    return RansSimdDecSym(r, tab);
 }
 
 void rans_simd_dec_renorm(RansSimdDec* r, uint16_t** pptr) {

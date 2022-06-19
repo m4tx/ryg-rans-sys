@@ -17,7 +17,7 @@ void rans_64_dec_init(Rans64State* r, uint32_t** pptr) {
 }
 
 uint32_t rans_64_dec_get(Rans64State* r, uint32_t scale_bits) {
-    Rans64DecGet(r, scale_bits);
+    return Rans64DecGet(r, scale_bits);
 }
 
 void rans_64_dec_advance(Rans64State* r, uint32_t** pptr, uint32_t start, uint32_t freq, uint32_t scale_bits) {

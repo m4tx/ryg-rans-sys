@@ -5,7 +5,7 @@ void rans_enc_init(RansState* r) {
 }
 
 RansState rans_enc_renorm(RansState x, uint8_t** pptr, uint32_t freq, uint32_t scale_bits) {
-    RansEncRenorm(x, pptr, freq, scale_bits);
+    return RansEncRenorm(x, pptr, freq, scale_bits);
 }
 
 void rans_enc_put(RansState* r, uint8_t** pptr, uint32_t start, uint32_t freq, uint32_t scale_bits) {
@@ -21,7 +21,7 @@ void rans_dec_init(RansState* r, uint8_t** pptr) {
 }
 
 uint32_t rans_dec_get(RansState* r, uint32_t scale_bits) {
-    RansDecGet(r, scale_bits);
+    return RansDecGet(r, scale_bits);
 }
 
 void rans_dec_advance(RansState* r, uint8_t** pptr, uint32_t start, uint32_t freq, uint32_t scale_bits) {

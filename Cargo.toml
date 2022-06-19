@@ -1,6 +1,6 @@
 [package]
 name = "ryg-rans-sys"
-version = "1.0.4"
+version = "1.0.5"
 edition = "2021"
 description = "FFI bindings for ryg_rans.\n\nryg_rans is automatically built and linked statically. Requires a C compiler."
 categories = [ "external-ffi-bindings", "encoding" ]
@@ -13,6 +13,7 @@ homepage = "https://github.com/m4tx/ryg-rans-sys"
 license = "MIT"
 build = "src/build.rs"
 links = "ryg_rans"
+rust-version = "1.56.1"
 
 [dependencies]
 libc = "0.2.126"
