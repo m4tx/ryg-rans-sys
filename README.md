@@ -6,6 +6,9 @@
 
 This crate exposes the raw ryg_rans API.
 
+You probably want to use the [`rans`](https://crates.io/crates/rans) crate
+instead of this.
+
 ## Requirements
 
 * C compiler
