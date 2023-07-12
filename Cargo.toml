@@ -21,7 +21,7 @@ libc = "0.2.126"
 [build-dependencies]
 cc = { version = "1.0.73", features = ["parallel"] }
 dunce = "1.0.2"
-bindgen = "0.60.1"
+bindgen = "0.66.1"
 
 [lib]
 name = "ryg_rans_sys"
