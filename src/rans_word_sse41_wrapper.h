@@ -2,6 +2,7 @@
 #define RYG_RANS_SYS_RANS_WORD_SSE41_WRAPPER_H
 
 #include "platform.h"
+#include "sse_platform.h"
 #include "rans_word_sse41.h"
 
 void rans_word_tables_init_symbol(RansWordTables* tab, uint8_t sym, uint32_t start, uint32_t freq);

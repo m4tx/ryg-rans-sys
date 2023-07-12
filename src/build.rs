@@ -5,8 +5,11 @@
 ))]
 compile_error!("at least one of the features: byte, 64, word_sse41 must be enabled");
 
+#[cfg(all(feature = "word_sse41", not(target_feature = "sse4.1")))]
+compile_error!("sse4.1 must be enabled for the word_sse41 feature");
+
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 fn main() {
     let mut c = cc::Build::new();
@@ -16,7 +19,7 @@ fn main() {
 
     println!(
         "cargo:include={}",
-        env::join_paths(&[&src, &vendor]).unwrap().to_str().unwrap()
+        env::join_paths([&src, &vendor]).unwrap().to_str().unwrap()
     );
     println!(
         "cargo:rerun-if-changed={}/rans_byte_wrapper.c",
@@ -46,19 +49,22 @@ fn main() {
     c.include(&vendor);
     c.pic(true);
 
-    if let Ok(target_cpu) = env::var("TARGET_CPU") {
-        c.flag_if_supported(&format!("-march={}", target_cpu));
+    if let Ok(target_features) = env::var("CARGO_CFG_TARGET_FEATURE") {
+        if target_features.split(',').any(|x| x == "sse4.1") {
+            c.flag_if_supported("-msse4.1");
+        }
     }
 
     c.warnings(false);
 
-    let mut files: Vec<&str> = Vec::new();
-    #[cfg(feature = "byte")]
-    files.push("src/rans_byte_wrapper.c");
-    #[cfg(feature = "64")]
-    files.push("src/rans_64_wrapper.c");
-    #[cfg(feature = "word_sse41")]
-    files.push("src/rans_word_sse41_wrapper.c");
+    let files: Vec<&str> = vec![
+        #[cfg(feature = "byte")]
+        "src/rans_byte_wrapper.c",
+        #[cfg(feature = "64")]
+        "src/rans_64_wrapper.c",
+        #[cfg(feature = "word_sse41")]
+        "src/rans_word_sse41_wrapper.c",
+    ];
 
     for file in files {
         c.file(file);
@@ -74,7 +80,7 @@ fn main() {
     gen_bindings(&src, &vendor, "rans_word_sse41");
 }
 
-fn gen_bindings(src: &PathBuf, vendor: &PathBuf, mod_name: &str) {
+fn gen_bindings(src: &Path, vendor: &Path, mod_name: &str) {
     let bindings = bindgen::Builder::default()
         .clang_arg(format!("-I{}", vendor.to_str().unwrap()))
         .header(format!("{}/{}_wrapper.h", src.to_str().unwrap(), mod_name))
