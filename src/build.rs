@@ -84,7 +84,7 @@ fn gen_bindings(src: &Path, vendor: &Path, mod_name: &str) {
     let bindings = bindgen::Builder::default()
         .clang_arg(format!("-I{}", vendor.to_str().unwrap()))
         .header(format!("{}/{}_wrapper.h", src.to_str().unwrap(), mod_name))
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .allowlist_function("rans_.*")
         .allowlist_type("Rans.*")
         .generate()
