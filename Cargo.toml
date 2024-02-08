@@ -13,15 +13,15 @@ homepage = "https://github.com/m4tx/ryg-rans-sys"
 license = "MIT"
 build = "src/build.rs"
 links = "ryg_rans"
-rust-version = "1.60.0"
+rust-version = "1.71.0"
 
 [dependencies]
-libc = "0.2.151"
+libc = "0.2.153"
 
 [build-dependencies]
 cc = { version = "1.0.83", features = ["parallel"] }
 dunce = "1.0.4"
-bindgen = "0.69.1"
+bindgen = "0.69.4"
 
 [lib]
 name = "ryg_rans_sys"
