@@ -18,13 +18,14 @@ jobs:
   build:
     strategy:
       matrix:
-        rust: [ "stable", "nightly" ]
-        os: [ ubuntu-latest, macos-latest, windows-2019 ]
+        rust: [ "stable", "nightly", "1.71" ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
         features: [ "default", "byte", "64", "word_sse41" ]
         include:
           - target-cpu: x86-64
           - features: word_sse41
             target-cpu: sandybridge
+
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout source
@@ -44,6 +45,16 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
+
+      - name: Install matching LLVM
+        run: |
+          wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main'
+          sudo apt update
+          sudo apt upgrade -y
+          sudo apt install -y llvm-17-dev
+          sudo apt remove -y llvm-14-dev libclang-common-14-dev libclang-common-13-dev libclang-common-11-dev
+        if: matrix.os == 'ubuntu-latest'
 
       - name: Build
         run: cargo +${{ matrix.rust }} build --features=${{ matrix.features }}
