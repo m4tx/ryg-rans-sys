@@ -55,7 +55,6 @@ jobs:
           wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
           sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main'
           sudo apt update
-          sudo apt upgrade -y
           sudo apt install -y llvm-17-dev
           sudo apt remove -y llvm-14-dev libclang-common-14-dev
         if: matrix.os == 'ubuntu-latest'
