@@ -1,7 +1,7 @@
 [package]
 name = "ryg-rans-sys"
 version = "1.2.0"
-edition = "2021"
+edition = "2024"
 description = "FFI bindings for ryg_rans.\n\nryg_rans is automatically built and linked statically. Requires a C compiler."
 categories = [ "external-ffi-bindings", "encoding" ]
 authors = ["Mateusz Maćkowski <mateusz@mackowski.org>"]
@@ -11,12 +11,10 @@ readme = "README.md"
 repository = "https://github.com/m4tx/ryg-rans-sys.git"
 homepage = "https://github.com/m4tx/ryg-rans-sys"
 license = "MIT"
-build = "src/build.rs"
 links = "ryg_rans"
-rust-version = "1.71.0"
+rust-version = "1.85.0"
 
 [dependencies]
-libc = "0.2.153"
 
 [build-dependencies]
 cc = { version = "1.0.83", features = ["parallel"] }
